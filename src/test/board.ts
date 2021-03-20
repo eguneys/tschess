@@ -15,12 +15,13 @@ export default function() {
   it('board');
 
   it('returns same reference', () => {
-    qed('route1', disp.route1(a8, wR)[0] ===
-      disp.route1(a8, wR)[3], true);
 
-    let res = dir.rroute2s.get(dt.DRook, a8);
+    qed('route1', disp.route1(a8, wR).get(0) ===
+      disp.route1(a8, wR).get(3), true);
 
-    console.log(res);
+    let res = dir.rroute2(dt.DRook, a8);
+
+    qed('route2', res.get(0) === res.get(3), true);
   });
   
 

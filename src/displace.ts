@@ -50,16 +50,16 @@ export const projections: Projection[] = [1,2,3,4,5,6,7]
 
 export function route1Captures(pos: nt.Pos, piece: nt.Piece): dir.Route1<nt.Pos> {
   if (piece.role === 'p') {
-    return dir.rroute2s.get(pawnCaptures[piece.color], pos);
+    return dir.rroute2(pawnCaptures[piece.color], pos);
   }
-  return dir.rroute2s.get(regulars[piece.role], pos);
+  return dir.rroute2(regulars[piece.role], pos);
 }
 
 export function route1(pos: nt.Pos, piece: nt.Piece): dir.Route1<nt.Pos> {
   if (piece.role === 'p') {
-    return dir.rroute2s.get(pawns[piece.color], pos);
+    return dir.rroute2(pawns[piece.color], pos);
   }
-  return dir.rroute2s.get(regulars[piece.role], pos);
+  return dir.rroute2(regulars[piece.role], pos);
 }
 
 export function projection(pos: nt.Pos, piece: nt.Piece): Projection {

@@ -28,7 +28,7 @@ export function castles(board: nt.Board, turn: nt.Color, castle: nt.CastleMeta):
   let destKingPos = poss.pget(castle.king, origKingPos[1]);
 
   let rookTrip = 
-    dir.rroute0s.get(
+    dir.rroute0(
       castle.trip,
       origKingPos[0]);
 
@@ -94,7 +94,7 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
     let captures: Array<ts.Move> = [];
     
     for (let i = 1; i < projection + 1; i++) {
-      let to = route0[i]
+      let to = route0.get(i)
 
       if (!to) {
         continue;
@@ -125,12 +125,13 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
 
 
     for (let i = 1; i < projection + 1; i++) {
-      let to = route0[i]
+      let to = route0.get(i)
 
       if (!to) {
         continue;
       }
 
+      let _to: nt.Pos = to;
       if (!board.get(to)) {
         if (disp.promotes(to, piece)) {
           nt.promotables.forEach(role => {
@@ -143,7 +144,7 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
                 situationBefore,
                 after,
                 orig: pos,
-                dest: to,
+                dest: _to,
                 promotion: role
               });
             }
