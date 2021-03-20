@@ -4,8 +4,8 @@ import { p,
          nt,
          db  } from 'nefs';
 
+import * as ts from './types';
 import * as dir from './direction';
-
 
 import * as u from './util';
 
@@ -15,6 +15,29 @@ export const capture = u.seqable(_capture);
 export const move = u.seqable(_move);
 export const promote = u.seqable(_promote);
 export const castle = u.seqable(_castle);
+
+export function actors(board: nt.Board): Map<nt.Pos, ts.Actor> {
+  let res = new Map()
+  for (let [pos, piece] of board) {
+    if (piece.role === 'p') {
+      for (let promotion of nt.promotables) {
+        res.set(pos, {
+          pos,
+          piece,
+          board,
+          promotion
+        });
+      }
+    } else {
+      res.set(pos, {
+        pos,
+        piece,
+        board
+      });
+    }
+  }
+  return res;
+}
 
 export function firstPosForPieceOnRoute(board: nt.Board, 
                                         piece: nt.Piece,

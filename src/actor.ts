@@ -28,7 +28,7 @@ export function castles(board: nt.Board, turn: nt.Color, castle: nt.CastleMeta):
   let destKingPos = poss.pget(castle.king, origKingPos[1]);
 
   let rookTrip = 
-    dir.rroute0(
+    dir.rroute0s.get(
       castle.trip,
       origKingPos[0]);
 
