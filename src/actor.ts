@@ -94,7 +94,7 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
     let captures: Array<ts.Move> = [];
     
     for (let i = 1; i < projection + 1; i++) {
-      let to = route0.get(i)
+      let to = route0[i]
 
       if (!to) {
         continue;
@@ -125,7 +125,7 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
 
 
     for (let i = 1; i < projection + 1; i++) {
-      let to = route0.get(i)
+      let to = route0[i]
 
       if (!to) {
         continue;

@@ -16,12 +16,12 @@ export default function() {
 
   it('returns same reference', () => {
 
-    qed('route1', disp.route1(a8, wR).get(0) ===
-      disp.route1(a8, wR).get(3), true);
+    qed('route1', disp.route1(a8, wR)[0] ===
+      disp.route1(a8, wR)[3], true);
 
     let res = dir.rroute2(dt.DRook, a8);
 
-    qed('route2', res.get(0) === res.get(3), true);
+    qed('route2', res[0] === res[3], true);
   });
   
 
