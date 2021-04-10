@@ -57,27 +57,24 @@ export function castles(board: nt.Board, turn: nt.Color, castle: nt.CastleMeta):
 
 }
 
-export function actors(board: nt.Board, 
-                       piece: nt.Piece,
-                       pos: Partial<nt.Pos>,
-                       promotion?: nt.Role): Array<ts.Actor> {
-
-  let res: Array<ts.Actor> = [];
+export function actor(board: nt.Board, 
+                      piece: nt.Piece,
+                      file: nt.File | undefined,
+                      rank: nt.Rank | undefined,
+                      promotion?: nt.Role): nt.Maybe<ts.Actor> {
 
   for (let [_pos, _piece] of board.entries()) {
     if (_piece === piece && 
-      _pos[0] === (pos[0] || _pos[0]) && 
-      _pos[1] === (pos[1] || _pos[1]))
+      _pos[0] === (file || _pos[0]) && 
+      _pos[1] === (rank || _pos[1]))
 
-      res.push({
+      return {
         pos: _pos,
         piece,
         board,
         promotion
-      });
+      };
   }
-
-  return res;
 }
 
 export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
@@ -100,18 +97,36 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
         continue;
       }
 
-      if (board.get(to)) {
+      if (board.get(to)?.color === r.otherColor(piece.color)) {
+        if (disp.promotes(to, piece)) {
+          nt.promotables.forEach(role => {
+            let b1 = b.capture(board, pos, to),
+            after = b.promote(b1, to, role);
 
-        let after = b.capture(board, pos, to);
-        if (after) {
-          captures.push({
-            piece,
-            situationBefore,
-            after,
-            orig: pos,
-            dest: to,
-            capture: to
+            if (after) {
+              captures.push({
+                piece,
+                situationBefore,
+                after,
+                orig: pos,
+                dest: to,
+                capture: to,
+                promotion: role
+              });
+            }
           });
+        } else {
+          let after = b.capture(board, pos, to);
+          if (after) {
+            captures.push({
+              piece,
+              situationBefore,
+              after,
+              orig: pos,
+              dest: to,
+              capture: to
+            });
+          }
         }
         break;
       }
@@ -131,7 +146,6 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
         continue;
       }
 
-      let _to: nt.Pos = to;
       if (!board.get(to)) {
         if (disp.promotes(to, piece)) {
           nt.promotables.forEach(role => {
@@ -144,7 +158,7 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
                 situationBefore,
                 after,
                 orig: pos,
-                dest: _to,
+                dest: to,
                 promotion: role
               });
             }

@@ -20,7 +20,7 @@ let pawnCaptures = {
   'b': dt.DBPawnC
 };
 
-const regularProjection = {
+export const regularProjection = {
   'p': 1,
   'n': 1,
   'r': 8,
@@ -29,12 +29,12 @@ const regularProjection = {
   'k': 1
 }
 
-const pawn2MoveRanks = {
+export const pawn2MoveRanks = {
   'w': 2,
   'b': 7
 }
 
-const pawnPromoteRanks = {
+export const pawnPromoteRanks = {
   'w': 8,
   'b': 1
 }

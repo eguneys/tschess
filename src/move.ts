@@ -1,5 +1,5 @@
 import { nt, r, p, pi, side, db } from 'nefs';
-import { actors, moves, castles } from './actor';
+import { actor, moves, castles } from './actor';
 import * as ts from './types';
 
 let { pieces } = db;
@@ -14,14 +14,16 @@ export function move(before: nt.Situation, sanMeta: nt.SanMetaOrCastles): nt.May
 
 function _move(before: nt.Situation, sanMeta: nt.SanMeta): nt.Maybe<ts.Move> {
 
-  let _actors = actors(before.board, 
-                       pieces.pget(before.turn, sanMeta.role),
-                       [sanMeta.file, sanMeta.rank],
-                       sanMeta.promotion);
+  let _actor = actor(before.board, 
+                     pieces.pget(before.turn, sanMeta.role),
+                     sanMeta.file,
+                     sanMeta.rank,
+                     sanMeta.promotion);
 
-  return _actors.flatMap(actor =>
-    moves(actor)
-      .filter(_ => _.dest === sanMeta.to))[0];
+  if (_actor) {
+    return moves(_actor)
+      .find(_ => _.dest === sanMeta.to);
+  }
 }
 
 export function situationAfter(move: ts.Move): nt.Situation {
@@ -31,8 +33,11 @@ export function situationAfter(move: ts.Move): nt.Situation {
   }
 }
 
+export const promotionS = (promotion: nt.Role) =>
+  `=${promotion.toUpperCase()}`;
+
 export function uci(move: ts.Move): string {
-  return p.key(move.orig) + p.key(move.dest);
+  return p.key(move.orig) + p.key(move.dest) + (move.promotion ? promotionS(move.promotion):'');
 }
 
 export function san(move: ts.Move): string {
@@ -44,9 +49,9 @@ export function san(move: ts.Move): string {
   let pieceS = '',
   fileS = '',
   rankS = '',
-  captureS = '',
+  captureS = move.capture?'x':'',
   toS = p.key(move.dest),
-  promotionS = '',
+  _promotionS = move.promotion?promotionS(move.promotion):'',
   checkS = '',
   mateS = '';
   
@@ -54,7 +59,7 @@ export function san(move: ts.Move): string {
     pieceS = pi.fen(move.piece).toUpperCase();
   }
 
-  return [pieceS, fileS, rankS, captureS, toS, promotionS, checkS, mateS].join('');
+  return [pieceS, fileS, rankS, captureS, toS, _promotionS, checkS, mateS].join('');
 }
 
 export function str(move: ts.Move): string {

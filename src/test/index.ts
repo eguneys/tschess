@@ -9,8 +9,8 @@ export default function() {
 
   tMo(board);
   tMo(actor);
-  tMo(move);
-  tMo.only(dir);
+  tMo.only(move);
+  tMo(dir);
 
   run();
 }

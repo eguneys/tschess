@@ -13,6 +13,8 @@ let { poss } = db;
 
 export const capture = u.seqable(_capture);
 export const move = u.seqable(_move);
+export const drop = u.seqable(_drop);
+export const pickup = u.seqable(_pickup);
 export const promote = u.seqable(_promote);
 export const castle = u.seqable(_castle);
 
@@ -110,6 +112,21 @@ function _capture(board: nt.Board, pos: nt.Pos, to: nt.Pos): nt.Maybe<nt.Board> 
 
     return b2;
   }  
+}
+
+function _pickup(board: nt.Board, pos: nt.Pos): nt.Maybe<nt.Board> {
+  let p = board.get(pos)
+  if (p) { 
+    let b2 = new Map([...board]);
+    b2.delete(pos);
+    return b2;
+  }
+}
+
+function _drop(board: nt.Board, pos: nt.Pos, piece: nt.Piece): nt.Maybe<nt.Board> {
+  let b2 = new Map([...board]);
+  b2.set(pos, piece);
+  return b2;
 }
 
 function _move(board: nt.Board, pos: nt.Pos, to: nt.Pos): nt.Maybe<nt.Board> {
