@@ -1,4 +1,5 @@
-import { p, 
+import { color,
+         p, 
          pi,
          r,
          nt,
@@ -17,6 +18,18 @@ export const drop = u.seqable(_drop);
 export const pickup = u.seqable(_pickup);
 export const promote = u.seqable(_promote);
 export const castle = u.seqable(_castle);
+
+export function actorsOf(board: nt.Board): color.CMap<Array<ts.Actor>> {
+  let res: color.CMap<Array<ts.Actor>> = {
+    w: [],
+    b: []
+  };
+  
+  for (let _ of actors(board).values()) {
+    res[_.piece.color].push(_);
+  }
+  return res;
+}
 
 export function actors(board: nt.Board): Map<nt.Pos, ts.Actor> {
   let res = new Map()

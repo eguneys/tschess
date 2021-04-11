@@ -57,26 +57,6 @@ export function castles(board: nt.Board, turn: nt.Color, castle: nt.CastleMeta):
 
 }
 
-export function actor(board: nt.Board, 
-                      piece: nt.Piece,
-                      file: nt.File | undefined,
-                      rank: nt.Rank | undefined,
-                      promotion?: nt.Role): nt.Maybe<ts.Actor> {
-
-  for (let [_pos, _piece] of board.entries()) {
-    if (_piece === piece && 
-      _pos[0] === (file || _pos[0]) && 
-      _pos[1] === (rank || _pos[1]))
-
-      return {
-        pos: _pos,
-        piece,
-        board,
-        promotion
-      };
-  }
-}
-
 export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
 
   let situationBefore = {

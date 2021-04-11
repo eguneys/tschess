@@ -1,30 +1,8 @@
 import { nt, r, p, pi, side, db } from 'nefs';
-import { actor, moves, castles } from './actor';
+import { moves, castles } from './actor';
 import * as ts from './types';
 
 let { pieces } = db;
-
-export function move(before: nt.Situation, sanMeta: nt.SanMetaOrCastles): nt.Maybe<ts.Move> {
-  if (side.isCastles(sanMeta)) {
-    return castles(before.board, before.turn, sanMeta);
-  } else {
-    return _move(before, sanMeta);
-  }
-}
-
-function _move(before: nt.Situation, sanMeta: nt.SanMeta): nt.Maybe<ts.Move> {
-
-  let _actor = actor(before.board, 
-                     pieces.pget(before.turn, sanMeta.role),
-                     sanMeta.file,
-                     sanMeta.rank,
-                     sanMeta.promotion);
-
-  if (_actor) {
-    return moves(_actor)
-      .find(_ => _.dest === sanMeta.to);
-  }
-}
 
 export function situationAfter(move: ts.Move): nt.Situation {
   return {
@@ -47,7 +25,7 @@ export function san(move: ts.Move): string {
     return "O-O-O";
   }
   let pieceS = '',
-  fileS = '',
+  fileS = move.capture?p.fkey(move.orig[0]):'',
   rankS = '',
   captureS = move.capture?'x':'',
   toS = p.key(move.dest),

@@ -5,3 +5,4 @@ export * as disp from './displace';
 export * as a from './actor';
 export * as m from './move';
 export * as dt from './dtypes';
+export * as san from './san';
