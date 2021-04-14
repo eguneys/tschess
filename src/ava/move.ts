@@ -2,6 +2,14 @@ import test from 'ava';
 import { a, m, nt, san, f, ps, pis } from './_exports';
 import { moveOrCastle as sanMove } from '../san';
 
+test('d4', t => {
+  let situation = f.situation(nt.initialFen)!;
+
+  let move = sanMove(san.str2meta('d4')!, situation)
+
+  t.is(m.san(move!), 'd4');
+});
+
 test('move', t => {
   let situation = f.situation(nt.initialFen)!;
 
