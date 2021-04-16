@@ -2,6 +2,31 @@ import test from 'ava';
 import { a, m, nt, san, f, ps, pis } from './_exports';
 import { moveOrCastle as sanMove } from '../san';
 
+export function playMoves(s: nt.Situation, moves: string) {
+  return moves.split(' ')
+    .map(san.str2meta)
+    .map(_ => _!)
+    .reduce((s, _) => m.situationAfter(sanMove(_, s)!), s);
+}
+
+export function playMove(s: nt.Situation, move: string) {
+  return sanMove(san.str2meta(move)!, s)!;
+}
+
+test('Qxf7', t => {
+  let Qf3 = playMoves(f.situation(nt.initialFen)!, 'd4 d5 Qf3 a6');
+
+  t.is(m.san(playMove(Qf3, 'Qxf7')), 'Qxf7');  
+});
+
+test('exd5', t => {
+  let situation = f.situation(nt.initialFen)!;
+
+  let e4d5 = playMoves(situation, 'e4 d5');
+
+  t.is(m.san(playMove(e4d5, 'exd5')), 'exd5');
+});
+
 test('d4', t => {
   let situation = f.situation(nt.initialFen)!;
 

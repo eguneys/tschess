@@ -24,9 +24,17 @@ export function san(move: ts.Move): string {
   } else if (move.castle === side.LongCastle) {
     return "O-O-O";
   }
+
+  let ambigiousFile = false,
+  ambigiousRank = false,
+  pawnCapture = move.capture && move.piece.role === 'p',
+  pawnCaptureOrAmbigiousFile = pawnCapture || ambigiousFile;
+
+  
+  
   let pieceS = '',
-  fileS = move.capture?p.fkey(move.orig[0]):'',
-  rankS = '',
+  fileS = pawnCaptureOrAmbigiousFile?p.fkey(move.orig[0]):'',
+  rankS = ambigiousRank?p.rkey(move.orig[1]):'',
   captureS = move.capture?'x':'',
   toS = p.key(move.dest),
   _promotionS = move.promotion?promotionS(move.promotion):'',

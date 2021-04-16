@@ -26,6 +26,8 @@ Based on [Scala Chess](https://github.com/ornicar/scalachess).
 
 Uses types from [nefs](https://github.com/eguneys/nefs).
 
+See [index.ts](src/index.ts) for exported names.
+
 ## Move with San
 
 ```
