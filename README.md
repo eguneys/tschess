@@ -15,8 +15,33 @@ Based on [Scala Chess](https://github.com/ornicar/scalachess).
     dir, // direction
     disp, // displace
     dt, // dtypes
-    board // board
+    board, // board
+    san, // san
+    uci, // uci
 } from 'tschess';
 
 ```
 
+## Api
+
+Uses types from [nefs](https://github.com/eguneys/nefs).
+
+## Move with San
+
+```
+
+    import { nt, f, san } from 'nefs';
+    import { san as tssan } from 'tschess';
+
+    // export function moveOrCastle(sanOrCastle: nt.SanMetaOrCastles, situation: nt.Situation): nt.Maybe<tt.Move>;
+
+    let e4 = tssan.moveOrCastle(san.str2meta('e4'), f.situation(nt.initialFen));
+
+    f.fen(e4) // returns fen after e4 move.
+
+
+```
+
+## Move with Uci
+
+Similar functions for Uci type.
