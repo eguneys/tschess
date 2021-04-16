@@ -1,13 +1,24 @@
 import { nt, r, p, pi, side, db } from 'nefs';
 import { moves, castles } from './actor';
+import { kingPos } from './situation';
 import * as ts from './types';
 
 let { pieces } = db;
+
+export function kingPosBefore(move: ts.Move): nt.Maybe<nt.Pos> {
+  return kingPos(move.situationBefore);
+}
 
 export function situationAfter(move: ts.Move): nt.Situation {
   return {
     board: move.after,
     turn: r.otherColor(move.piece.color)
+  }
+}
+
+export function capturedPiece(move: ts.Move): nt.Maybe<nt.Piece> {
+  if (move.capture) {
+    return move.situationBefore.board.get(move.capture);
   }
 }
 

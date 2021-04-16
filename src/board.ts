@@ -7,7 +7,7 @@ import { color,
 
 import * as ts from './types';
 import * as dir from './direction';
-
+import { pis } from './db';
 import * as u from './util';
 
 let { poss } = db;
@@ -64,6 +64,11 @@ export function firstPosForPieceOnRoute(board: nt.Board,
     .map(([k]) => k)[0];
 
 }
+
+export const kingPos = (board: nt.Board): color.CMap<nt.Maybe<nt.Pos>> => ({
+  w: posOf(board, pis.wK),
+  b: posOf(board, pis.bK)
+});
 
 export function posOf(board: nt.Board, piece: nt.Piece, file?: nt.File): nt.Maybe<nt.Pos> {
   return [...board.entries()]

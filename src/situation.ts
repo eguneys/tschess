@@ -1,7 +1,11 @@
 import * as tt from './types';
 import { nt, side } from 'nefs';
-import { actors as boardActors, actorsOf } from './board';
+import { actors as boardActors, actorsOf, kingPos as boardKingPos } from './board';
 import { moves as actorMoves, castles as actorCastles } from './actor';
+
+export function kingPos(situation: nt.Situation): nt.Maybe<nt.Pos> {
+  return boardKingPos(situation.board)[situation.turn];
+}
 
 export function actors(situation: nt.Situation): Array<tt.Actor> {
   return actorsOf(situation.board)[situation.turn];
