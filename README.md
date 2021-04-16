@@ -33,13 +33,13 @@ See [index.ts](src/index.ts) for exported names.
 ```
 
     import { nt, f, san } from 'nefs';
-    import { san as tssan } from 'tschess';
+    import { m, san as tssan } from 'tschess';
 
     // export function moveOrCastle(sanOrCastle: nt.SanMetaOrCastles, situation: nt.Situation): nt.Maybe<tt.Move>;
 
-    let e4 = tssan.moveOrCastle(san.str2meta('e4'), f.situation(nt.initialFen));
+    let e4 = tssan.moveOrCastle(san.str2meta('e4')!, f.situation(nt.initialFen)!)!;
 
-    f.fen(e4) // returns fen after e4 move.
+    f.fen(m.situationAfter(e4)) // returns fen after e4 move.
 
 
 ```
