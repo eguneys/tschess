@@ -1254,6 +1254,11 @@ ms@^2.1.3:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
+nefs@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/nefs/-/nefs-1.0.0.tgz#5aa879acbf4b2b60ad4ecff0d895639cfa7f0bb2"
+  integrity sha512-fL+BuUjK8eGSl28DKHQdl4fugLFXeVQRL19Rk/JtVB+eG+wl5DPd8PB7JE61d4hOeyQuRUbr4XqF/y6GO1bRpw==
+
 node-cleanup@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/node-cleanup/-/node-cleanup-2.1.2.tgz#7ac19abd297e09a7f72a71545d951b517e4dde2c"
