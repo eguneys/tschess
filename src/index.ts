@@ -6,7 +6,7 @@ export * as disp from './displace';
 export * as a from './actor';
 export * as m from './move';
 export * as dt from './dtypes';
-export * as tssan from './san';
+export * as tssan from './tssan';
 export * as uci from './uci';
 export * as misc from './misc';
 export * as sit from './situation';
