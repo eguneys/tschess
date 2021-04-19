@@ -1,6 +1,6 @@
 {
   "name": "tschess",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "include": [
     "src/*.ts"
   ],
@@ -14,9 +14,9 @@
   "scripts": {
     "watch": "tsc-watch --onSuccess 'ava'",
     "build": "rm -rf lib && tsc",
-    "test": "yarn -s build && ava"
+    "test": "yarn -s build && ava",
+    "prepublish": "yarn build"
   },
-  "prepublish": "yarn build",
   "devDependencies": {
     "ava": "^3.15.0",
     "tsc-watch": "^4.2.9",
