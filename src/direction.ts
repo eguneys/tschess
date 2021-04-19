@@ -1,5 +1,7 @@
 import * as sss from './sss';
-import { p, nt, db } from 'nefs';
+import * as p from './pos';
+import * as nt from './types';
+import * as db from './db';
 import * as dt from './dtypes';
 
 

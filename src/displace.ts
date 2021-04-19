@@ -1,4 +1,4 @@
-import { nt } from 'nefs';
+import * as nt from './types';
 import * as dir from './direction';
 import * as dt from './dtypes';
 

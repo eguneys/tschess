@@ -1,6 +1,5 @@
 import test from 'ava';
-import { nt, f, san } from 'nefs';
-import { m, san as tssan } from '../';
+import { nt, f, san, m, tssan } from './_exports';
 
 
 test('readme', t => {

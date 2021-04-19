@@ -1,7 +1,12 @@
-import { nt, r, p, pi, side, db } from 'nefs';
+import * as nt from './types';
+import * as r from './role';
+import * as p from './pos';
+import * as pi from './piece';
+import * as side from './side';
+import * as  db from './db';
 import { moves, castles } from './actor';
 import { kingPos } from './situation';
-import * as ts from './types';
+import * as ts from './types2';
 
 let { pieces } = db;
 

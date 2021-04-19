@@ -1,9 +1,10 @@
 import { qed, it } from 'tiqed';
-import { nt, db } from 'nefs';
+import * as nt from '../types';
+import * as db from '../db';
 import * as dt from '../dtypes';
 import * as dir from '../direction';
 import * as disp from '../displace';
-import * as ts from '../types';
+import * as ts from '../types2';
 
 let { poss, pieces } = db;
 

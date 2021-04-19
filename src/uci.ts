@@ -1,35 +1,46 @@
-import * as tt from './types';
-import { nt, side } from 'nefs';
-import { castles as actorCastles, moves as actorMoves } from './actor';
+import * as nt from './types';
+import * as p from './pos';
+import * as p2 from './pos2';
+import * as r from './role';
 
-export function moveOrCastle(uciOrCastle: nt.UciOrCastles, situation: nt.Situation): nt.Maybe<tt.Move> {
-  if (side.isCastles(uciOrCastle)) {
-    return castle(uciOrCastle, situation);
-  } else {
-    return move(uciOrCastle, situation);
-  }  
+import * as side from './side';
+
+const shortCastles = ['o-o', 'O-O', '0-0'],
+longCastles = ['o-o-o', 'O-O-O', '0-0-0'];
+
+export function str2uci(str: string): nt.Maybe<nt.UciOrCastles> {
+  if (shortCastles.includes(str)) {
+    return side.ShortCastle;
+  } else if (longCastles.includes(str)) {
+    return side.LongCastle;
+  }
+  return uci(str);
 }
 
-export function castle(castle: nt.CastleMeta, situation: nt.Situation): nt.Maybe<tt.Move> {
-  return actorCastles(situation.board, situation.turn, castle);
-}
+export function uci(str: string): nt.Maybe<nt.Uci> {
+  let RE = /([a-z][1-8])([a-z][1-8])(=?[NBRQ]?)/;
 
-export function move(uci: nt.Uci, situation: nt.Situation): nt.Maybe<tt.Move> {
-  for (let [pos, piece] of situation.board) {
-    if (piece.color === situation.turn &&
-      pos === uci.orig) {
-      let m = actorMoves({
-        pos,
-        piece,
-        promotion: uci.promotion,
-        board: situation.board
-      }).find(m =>
-        m.dest === uci.dest &&
-        m.promotion === uci.promotion
-      );
-      if (m) {
-        return m;
+  let m = str.match(RE);
+
+  if (m) {
+    let [_, origS, destS, promotionS] = m;
+
+    promotionS = promotionS.replace('=', '');
+
+    let origKey = p.mPosKey(origS),
+    destKey = p.mPosKey(destS),
+    promotion = r.mRole(promotionS);
+
+    if (origKey && destKey) {
+
+      let orig = p2.pByKey(origKey),
+      dest = p2.pByKey(destKey);
+      
+      return {
+        orig,
+        dest,
+        promotion
       }
     }
-  }  
+  }
 }

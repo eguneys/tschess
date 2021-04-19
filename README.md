@@ -24,16 +24,13 @@ Based on [Scala Chess](https://github.com/ornicar/scalachess).
 
 ## Api
 
-Uses types from [nefs](https://github.com/eguneys/nefs).
-
 See [index.ts](src/index.ts) for exported names.
 
 ## Move with San
 
 ```
 
-    import { nt, f, san } from 'nefs';
-    import { m, san as tssan } from 'tschess';
+    import { nt, f, m, san, tssan } from 'tschess';
 
     // export function moveOrCastle(sanOrCastle: nt.SanMetaOrCastles, situation: nt.Situation): nt.Maybe<tt.Move>;
 

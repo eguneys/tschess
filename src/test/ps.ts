@@ -1,4 +1,5 @@
-import { nt, db } from 'nefs';
+import * as nt from '../types';
+import * as db from '../db';
 let { poss } = db;
 
 export const ps = {

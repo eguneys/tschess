@@ -1,11 +1,10 @@
-import { color,
-         p, 
-         pi,
-         r,
-         nt,
-         db  } from 'nefs';
-
-import * as ts from './types';
+import * as color from './color';
+import * as p from './pos';
+import * as pi from './piece';
+import * as r from './role';
+import * as nt from './types'
+import * as db from './db';
+import * as ts from './types2';
 import * as dir from './direction';
 import { pis } from './db';
 import * as u from './util';

@@ -1,10 +1,9 @@
-import { nt,
-         r,
-         db,
-         side } from 'nefs';
-
+import * as nt from './types';
+import * as r from './role';
+import * as db from './db';
+import * as side from './side';
 import * as b from './board';
-import * as ts from './types';
+import * as ts from './types2';
 import * as dir from './direction';
 import * as disp from './displace';
 

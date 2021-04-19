@@ -1,5 +1,7 @@
-import { nt, f, uci } from 'nefs';
-import * as tsuci from './uci';
+import * as nt from './types';
+import * as f from './fen';
+import * as uci from './uci';
+import * as tsuci from './tsuci';
 import * as m from './move';
 
 

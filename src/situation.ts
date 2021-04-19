@@ -1,5 +1,6 @@
-import * as tt from './types';
-import { nt, side } from 'nefs';
+import * as tt from './types2';
+import * as nt from './types';
+import * as side from './side';
 import { actors as boardActors, actorsOf, kingPos as boardKingPos } from './board';
 import { moves as actorMoves, castles as actorCastles } from './actor';
 

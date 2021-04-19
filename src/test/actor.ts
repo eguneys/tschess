@@ -1,5 +1,6 @@
 import { qed, it } from 'tiqed';
-import { nt, f } from 'nefs';
+import * as nt from '../types';
+import * as f from '../fen';
 import * as a from '../actor';
 
 export default function () {
