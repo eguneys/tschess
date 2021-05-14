@@ -12,6 +12,12 @@ export function playMove(s: nt.Situation, move: string) {
   return tssan.moveOrCastle(san.str2meta(move)!, s)!;
 }
 
+test.only('castles', t => {
+  let OO = playMoves(f.situation(nt.initialFen)!, 'd4 e6 c4 d5 g3 Nf6 Bg2 Be7 O-O');
+
+  t.is(m.san(playMove(OO, 'O-O')), 'O-O');
+});
+
 test('Qxf7', t => {
   let Qf3 = playMoves(f.situation(nt.initialFen)!, 'd4 d5 Qf3 a6');
 

@@ -28,3 +28,17 @@ export function isCastles(meta: nt.SanMetaOrCastles): meta is nt.CastleMeta;
 export function isCastles(meta: any): meta is nt.CastleMeta {
   return ((meta as nt.CastleMeta).king !== undefined)
 }
+
+export function kingPickup(pos: nt.Pos, piece: nt.Piece) {
+  if (piece.role === 'k') {
+    return pos[0] === 5;
+  }
+}
+
+export function shortDrop(dest: nt.Pos) {
+  return [G, H].includes(dest[0]);
+}
+
+export function longDrop(dest: nt.Pos) {
+  return [C, B, A].includes(dest[0]);
+}

@@ -32,7 +32,7 @@ export const files = ['a','b','c','d','e','f','g','h'];
 export const ranks = ['1','2','3','4','5','6','7','8'];
 export const colors: Color[] = ['w', 'b']
 export const roles: Role[] = ['r','b','n','q','k','p'];
-export const promotables: Role[] = ['r', 'b', 'n', 'q'];
+export const promotables: Role[] = ['q', 'n', 'r', 'b'];
 
 export type FileKey = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h'
 export type RankKey = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
@@ -88,6 +88,11 @@ export type Uci = {
   orig: Pos,
   dest: Pos,
   promotion?: Role
+}
+
+export type UciWithSan = {
+  uci: UciOrCastles,
+  san: San
 }
 
 export type UciOrCastles = Uci | CastleMeta

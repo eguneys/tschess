@@ -5,8 +5,8 @@ import * as r from './role';
 
 import * as side from './side';
 
-const shortCastles = ['o-o', 'O-O', '0-0'],
-longCastles = ['o-o-o', 'O-O-O', '0-0-0'];
+const shortCastles = ['o-o', 'O-O', '0-0', 'e8g8', 'e1g1'],
+longCastles = ['o-o-o', 'O-O-O', '0-0-0', 'e8c8', 'e1c1'];
 
 export function str2uci(str: string): nt.Maybe<nt.UciOrCastles> {
   if (shortCastles.includes(str)) {
@@ -42,5 +42,26 @@ export function uci(str: string): nt.Maybe<nt.Uci> {
         promotion
       }
     }
+  }
+}
+
+export function pos2str(orig: nt.Pos, dest: nt.Pos, piece: nt.Piece, promotion?: nt.Role) {
+
+  if (side.kingPickup(orig, piece)) {
+    if (side.shortDrop(dest)) {
+      return 'O-O';
+    } else if (side.longDrop(dest)) {
+      return 'O-O-O';
+    }
+  }
+  let promoteS = promotion?`=${promotion.toUpperCase()}`:'';
+  
+  return p.key(orig) + p.key(dest) + promoteS;
+}
+
+export function withSan(uci: nt.UciOrCastles, san: nt.San): nt.UciWithSan {
+  return {
+    uci,
+    san
   }
 }
