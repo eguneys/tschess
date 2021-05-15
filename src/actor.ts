@@ -154,6 +154,8 @@ export function moves({ board, piece, pos }: ts.Actor): Array<ts.Move> {
             });
           }
         }
+      } else {
+        break;
       }
     }
     return moves;

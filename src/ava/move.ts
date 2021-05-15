@@ -12,7 +12,13 @@ export function playMove(s: nt.Situation, move: string) {
   return tssan.moveOrCastle(san.str2meta(move)!, s)!;
 }
 
-test.only('castles', t => {
+test.only('jump over', t => {
+  let fe1 = f.situation('r1bqkb1r/pp2nppp/4p3/3pP3/3p4/3B4/PPP2PPP/RNBQ1RK1 w KQkq - 0 1')!;
+
+  t.is(m.uci(playMove(fe1, 'Re1')), 'f1e1');
+});
+
+test('castles', t => {
   let OO = playMoves(f.situation(nt.initialFen)!, 'd4 e6 c4 d5 g3 Nf6 Bg2 Be7 O-O');
 
   t.is(m.san(playMove(OO, 'O-O')), 'O-O');
